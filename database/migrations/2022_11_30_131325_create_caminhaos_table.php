@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('caminhaos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignIdFor(Role::class);
-            $table->string('cpf')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('placa');
+            $table->foreignIdFor(User::class, 'motorista_id');
+            $table->string('estado');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('caminhaos');
     }
 };

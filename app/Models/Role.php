@@ -15,4 +15,9 @@ class Role extends Model
     const SHIPPING_ADMIN = 6;
 
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'name'
+    ];
 }

@@ -1,6 +1,8 @@
 <?php
 
-use App\Models\Role;
+use App\Models\Transportadora;
+use App\Models\TypeAgendamento;
+use App\Models\Vaga;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +16,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('agendamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignIdFor(Role::class);
-            $table->string('cpf')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignIdFor(Transportadora::class);
+            $table->foreignIdFor(Vaga::class);
+            $table->foreignIdFor(TypeAgendamento::class);
+            $table->string('destino');
+            $table->dateTime('data');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('agendamentos');
     }
 };
